@@ -9,7 +9,7 @@
                 class="brand-image opacity-75 shadow" />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
-            <span class="brand-text fw-light">SIKAMEK</span>
+            <span class="brand-text fw-light">SIGAP</span>
             <!--end::Brand Text-->
         </a>
         <!--end::Brand Link-->
@@ -34,6 +34,20 @@
                 <li class="nav-header">DATA MASTER</li>
 
                 <li class="nav-item">
+                    <a href="{{ route('puskesmas.index') }}"
+                        class="nav-link {{ request()->routeIs('puskesmas.index') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-hospital"></i>
+                        <p>Puskesmas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('ambulans.index') }}"
+                        class="nav-link {{ request()->routeIs('ambulans.index') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-hospital"></i>
+                        <p>Ambulans</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('unit_kerja.index') }}"
                         class="nav-link {{ request()->routeIs('unit_kerja.index') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-building"></i>
@@ -51,7 +65,7 @@
                         </a>
                     </li>
                 @endcan
-                
+
                 <li class="nav-header">AUTH</li>
                 <li class="nav-item">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

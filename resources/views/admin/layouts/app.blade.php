@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>SIKAMEK - @yield('title')</title>
+    <title>SIGAP - @yield('title')</title>
     <link rel="icon" href="{{ asset('assets/dist/assets/img/logo.png') }}" type="image/x-icon">
 
     <!--begin::Primary Meta Tags-->

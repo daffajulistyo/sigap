@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>SIKAMEK - Pasaman</title>
+    <title>SIGAP - Pasaman</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -55,7 +55,7 @@
             <a href="index.html" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="nova/assets/img/logo.png" alt=""> -->
-                <h1 class="sitename">Sikamek</h1>
+                <h1 class="sitename">SIGAP</h1>
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -75,7 +75,7 @@
 
             <div class="container">
                 <div class="row">
-                    
+
                 </div>
             </div>
 
