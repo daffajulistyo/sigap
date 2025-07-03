@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Ambulans')
+@section('title', 'Riwayat Ambulance')
 @section('content')
     <main class="app-main">
         <!--begin::App Content Header-->
@@ -33,22 +33,23 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <h3 class="card-title">Daftar Riwayat Ambulance</h3>
-                                {{-- <div class="float-end">
+                                <div class="float-end">
                                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#createAmbulansModal">
-                                        <i class="bi bi-plus"></i> Tambah Ambulans
+                                        data-bs-target="#createRiwayatModal">
+                                        <i class="bi bi-plus"></i> Tambah Riwayat
                                     </button>
-                                </div> --}}
+                                </div>
                             </div>
                             <div class="card-body">
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Ambulance</th>
+                                            <th>Ambulans</th>
                                             <th>Tujuan</th>
                                             <th>Waktu</th>
                                             <th>Status</th>
+                                            <th>KM Tempuh</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -59,8 +60,9 @@
                                                 <td>
                                                     <strong>{{ $item->ambulans->nomor_polisi }} -
                                                         {{ $item->ambulans->merk }}
-                                                        ({{ $item->ambulans->tahun }})</strong><br>
-                                                    <small>{{ $item->ambulans->puskesmas->nama }}</small>
+                                                        ({{ $item->ambulans->tahun }})
+                                                    </strong><br>
+                                                    <small>{{ $item->ambulans->puskesmas->nama_puskesmas }}</small>
                                                 </td>
                                                 <td>{{ $item->tujuan }}</td>
                                                 <td>
@@ -99,10 +101,32 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('riwayat-ambulans.show', $item->id) }}"
-                                                        class="btn btn-sm btn-info" title="Detail">
+                                                    @if ($item->km_kembali)
+                                                        {{ $item->km_kembali - $item->km_berangkat }} km
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                                        data-bs-target="#showRiwayatModal"
+                                                        data-riwayat="{{ json_encode($item->toArray() + ['ambulans' => $item->ambulans->toArray(), 'puskesmas' => $item->ambulans->puskesmas->toArray()]) }}">
                                                         <i class="bi bi-eye"></i>
-                                                    </a>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#editRiwayatModal"
+                                                        data-riwayat="{{ json_encode($item->toArray() + ['ambulans' => $item->ambulans->toArray()]) }}">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <form action="{{ route('riwayat-ambulans.destroy', $item->id) }}"
+                                                        method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger" title="Hapus"
+                                                            onclick="return confirm('Apakah Anda yakin?')">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -125,5 +149,10 @@
         <!--end::App Content-->
     </main>
 
-    @include('admin.ambulans.show')
+    <!-- Modal Create -->
+    @include('admin.riwayat-ambulans.create')
+    @include('admin.riwayat-ambulans.show')
+    @include('admin.riwayat-ambulans.edit')
+
+
 @endsection

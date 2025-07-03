@@ -22,6 +22,17 @@ class RiwayatAmbulans extends Model
         'status_perjalanan'
     ];
 
+    protected $dates = [
+        'waktu_berangkat',
+        'waktu_kembali',
+        'deleted_at'
+    ];
+
+    protected $casts = [
+        'waktu_berangkat' => 'datetime',
+        'waktu_kembali' => 'datetime'
+    ];
+
     public function ambulans()
     {
         return $this->belongsTo(Ambulans::class);

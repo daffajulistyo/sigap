@@ -31,6 +31,15 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                @can('admin-only')
+                   <li class="nav-item">
+                        <a href="{{ route('riwayat-ambulans.index') }}"
+                            class="nav-link {{ request()->routeIs('riwayat-ambulans.index') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-clock-history"></i>
+                            <p>Riwayat Ambulance</p>
+                        </a>
+                    </li> 
+                @endcan
                 @can('super-admin-only')
                     <li class="nav-header">DATA MASTER</li>
 
