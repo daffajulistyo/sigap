@@ -31,32 +31,31 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-header">DATA MASTER</li>
-
-                <li class="nav-item">
-                    <a href="{{ route('puskesmas.index') }}"
-                        class="nav-link {{ request()->routeIs('puskesmas.index') ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-hospital"></i>
-                        <p>Puskesmas</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('ambulans.index') }}"
-                        class="nav-link {{ request()->routeIs('ambulans.index') ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-hospital"></i>
-                        <p>Ambulans</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('unit_kerja.index') }}"
-                        class="nav-link {{ request()->routeIs('unit_kerja.index') ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-building"></i>
-                        <p>Unit Kerja</p>
-                    </a>
-                </li>
-
-
                 @can('super-admin-only')
+                    <li class="nav-header">DATA MASTER</li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('puskesmas.index') }}"
+                            class="nav-link {{ request()->routeIs('puskesmas.index') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-hospital"></i>
+                            <p>Puskesmas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('ambulans.index') }}"
+                            class="nav-link {{ request()->routeIs('ambulans.index') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-car-front-fill"></i>
+                            <p>Ambulance</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('riwayat-ambulans.index') }}"
+                            class="nav-link {{ request()->routeIs('riwayat-ambulans.index') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-clock-history"></i>
+                            <p>Riwayat Ambulance</p>
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a href="{{ route('users.index') }}"
                             class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
@@ -71,7 +70,8 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                    <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="#" class="nav-link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="nav-icon bi bi-box-arrow-right"></i>
                         <p>Logout</p>
                     </a>

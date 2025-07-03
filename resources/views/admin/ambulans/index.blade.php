@@ -46,7 +46,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Puskesmas</th>
-                                            <th>Detail Ambulans</th>
+                                            <th>Detail Ambulance</th>
                                             <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -82,7 +82,7 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                                             data-bs-target="#showAmbulansModal"
                                                             data-ambulan="{{ json_encode($ambulan) }}">
                                                             <i class="fas fa-eye"></i>
@@ -120,7 +120,7 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                                             data-bs-target="#showAmbulansModal"
                                                             data-ambulan="{{ json_encode($ambulan) }}">
                                                             <i class="fas fa-eye"></i>

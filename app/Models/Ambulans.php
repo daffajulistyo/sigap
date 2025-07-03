@@ -10,7 +10,7 @@ class Ambulans extends Model
 {
     use HasFactory, SoftDeletes;
 
-     protected $fillable = [
+    protected $fillable = [
         'puskesmas_id',
         'nomor_polisi',
         'merk',
@@ -23,12 +23,17 @@ class Ambulans extends Model
     ];
 
     protected $attributes = [
-        'nomor_mesin' => 111, 
+        'nomor_mesin' => 111,
         'nomor_rangka' => 222,
     ];
 
     public function puskesmas()
     {
         return $this->belongsTo(Puskesmas::class);
+    }
+
+    public function riwayat()
+    {
+        return $this->hasMany(RiwayatAmbulans::class);
     }
 }

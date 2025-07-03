@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PuskesmasController;
+use App\Http\Controllers\RiwayatAmbulansController;
 use App\Http\Controllers\WorkUnitController;
 
 /*
@@ -42,9 +43,11 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-        Route::resource('unit_kerja', WorkUnitController::class);
+
         Route::resource('puskesmas', PuskesmasController::class);
         Route::resource('ambulans', AmbulansController::class);
+
+        Route::resource('riwayat-ambulans', RiwayatAmbulansController::class);
 
     });
 });
