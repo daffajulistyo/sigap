@@ -108,7 +108,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                                         data-bs-target="#showRiwayatModal"
                                                         data-riwayat="{{ json_encode($item->toArray() + ['ambulans' => $item->ambulans->toArray(), 'puskesmas' => $item->ambulans->puskesmas->toArray()]) }}">
                                                         <i class="bi bi-eye"></i>
@@ -116,19 +116,22 @@
                                                     <button type="button" class="btn btn-sm btn-primary"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#editRiwayatModal{{ $item->id }}">
-                                                        <i class="bi bi-pencil"></i> Edit
+                                                        <i class="bi bi-pencil"></i>
                                                     </button>
-                                                    <form action="{{ route('riwayat-ambulans.destroy', $item->id) }}"
-                                                        method="POST" class="d-inline">
+                                                    <form id="delete-form-{{ $item->id }}"
+                                                        action="{{ route('riwayat-ambulans.destroy', $item->id) }}"
+                                                        method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger" title="Hapus"
-                                                            onclick="return confirm('Apakah Anda yakin?')">
+                                                        <button type="button" class="btn btn-danger btn-sm"
+                                                            onclick="confirmDelete({{ $item->id }})" title="Hapus">
                                                             <i class="bi bi-trash"></i>
                                                         </button>
                                                     </form>
                                                 </td>
                                             </tr>
+                                                @include('admin.riwayat-ambulans.edit')
+
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -148,14 +151,10 @@
         </div>
         <!--end::App Content-->
     </main>
-    @php
-        $user = auth()->user();
-        $ambulans = \App\Models\Ambulans::where('puskesmas_id', $user->puskesmas_id)->with('puskesmas')->get();
-    @endphp
+
     <!-- Modal Create -->
     @include('admin.riwayat-ambulans.create')
     @include('admin.riwayat-ambulans.show')
-    @include('admin.riwayat-ambulans.edit')
 
 
 @endsection

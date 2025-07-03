@@ -73,6 +73,25 @@
                         </div>
                     </div>
 
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="kecamatan" class="form-label">Kecamatan</label>
+                            <input type="text" class="form-control @error('kecamatan') is-invalid @enderror"
+                                   id="kecamatan" name="kecamatan" value="{{ old('kecamatan') }}" required>
+                            @error('kecamatan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label for="desa" class="form-label">Desa/Kelurahan</label>
+                            <input type="text" class="form-control @error('desa') is-invalid @enderror"
+                                   id="desa" name="desa" value="{{ old('desa') }}" required>
+                            @error('desa')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
                     <!-- Input Koordinat Tersembunyi -->
                     <input type="hidden" name="latitude" value="{{ old('latitude', -0.31628) }}">
                     <input type="hidden" name="longitude" value="{{ old('longitude', 100.3489) }}">

@@ -144,6 +144,7 @@
                                                     </td>
                                                 </tr>
                                             @endif
+                                            @include('admin.ambulans.edit')
                                         @endforeach
                                     </tbody>
                                 </table>
