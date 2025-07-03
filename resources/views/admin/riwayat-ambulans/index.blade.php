@@ -113,10 +113,10 @@
                                                         data-riwayat="{{ json_encode($item->toArray() + ['ambulans' => $item->ambulans->toArray(), 'puskesmas' => $item->ambulans->puskesmas->toArray()]) }}">
                                                         <i class="bi bi-eye"></i>
                                                     </button>
-                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#editRiwayatModal"
-                                                        data-riwayat="{{ json_encode($item->toArray() + ['ambulans' => $item->ambulans->toArray()]) }}">
-                                                        <i class="bi bi-pencil"></i>
+                                                    <button type="button" class="btn btn-sm btn-primary"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editRiwayatModal{{ $item->id }}">
+                                                        <i class="bi bi-pencil"></i> Edit
                                                     </button>
                                                     <form action="{{ route('riwayat-ambulans.destroy', $item->id) }}"
                                                         method="POST" class="d-inline">
@@ -148,7 +148,10 @@
         </div>
         <!--end::App Content-->
     </main>
-
+    @php
+        $user = auth()->user();
+        $ambulans = \App\Models\Ambulans::where('puskesmas_id', $user->puskesmas_id)->with('puskesmas')->get();
+    @endphp
     <!-- Modal Create -->
     @include('admin.riwayat-ambulans.create')
     @include('admin.riwayat-ambulans.show')

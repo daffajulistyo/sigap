@@ -123,9 +123,9 @@ class RiwayatAmbulansController extends Controller
 
         // Update status ambulans
         if ($request->status_perjalanan === 'berjalan') {
-            $ambulans->update(['status' => 'digunakan']);
+            $ambulans->update(['status' => 'dinas']);
         } else {
-            $ambulans->update(['status' => 'stanby']);
+            $ambulans->update(['status' => 'standby']);
         }
 
         return redirect()->route('riwayat-ambulans.index')
