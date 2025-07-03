@@ -47,6 +47,8 @@
                                             <th>#</th>
                                             <th>Nama</th>
                                             <th>Username</th>
+                                            <th>Puskesmas</th>
+
                                             <th>Role</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -57,6 +59,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $admin->name }}</td>
                                                 <td>{{ $admin->username }}</td>
+                                                <td>{{ $admin->puskesmas->nama ?? '-' }}</td>
                                                 <td style="text-transform: capitalize;">{{ $admin->role }}</td>
                                                 <td>
                                                     <!-- Tombol Edit -->
@@ -86,94 +89,112 @@
                                                 </td>
                                             </tr>
                                             <!-- Modal Edit Admin -->
-                                            <div class="modal fade" id="editTechnicianModal{{ $admin->id }}"
-                                                tabindex="-1"
-                                                aria-labelledby="editTechnicianModalLabel{{ $admin->id }}"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title"
-                                                                id="editTechnicianModalLabel{{ $admin->id }}">Edit Admin
-                                                            </h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                        </div>
-                                                        <form method="POST"
-                                                            action="{{ route('users.update', $admin->id) }}">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <div class="modal-body">
-                                                                <!-- Nama -->
-                                                                <div class="row mb-3 align-items-center">
-                                                                    <div class="col-md-3">
-                                                                        <label for="name"
-                                                                            class="form-label">Nama</label>
-                                                                    </div>
-                                                                    <div class="col-md-9">
-                                                                        <input type="text" class="form-control"
-                                                                            id="name" name="name"
-                                                                            value="{{ $admin->name }}" required>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- Username -->
-                                                                <div class="row mb-3 align-items-center">
-                                                                    <div class="col-md-3">
-                                                                        <label for="username"
-                                                                            class="form-label">Username</label>
-                                                                    </div>
-                                                                    <div class="col-md-9">
-                                                                        <input type="text" class="form-control"
-                                                                            id="username" name="username"
-                                                                            value="{{ $admin->username }}" required>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- Email -->
-                                                                <div class="row mb-3 align-items-center">
-                                                                    <div class="col-md-3">
-                                                                        <label for="email"
-                                                                            class="form-label">Email</label>
-                                                                    </div>
-                                                                    <div class="col-md-9">
-                                                                        <input type="email" class="form-control"
-                                                                            id="email" name="email"
-                                                                            value="{{ $admin->email }}" required>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- Role -->
-                                                                <div class="row mb-3 align-items-center">
-                                                                    <div class="col-md-3">
-                                                                        <label for="role"
-                                                                            class="form-label">Role</label>
-                                                                    </div>
-                                                                    <div class="col-md-9">
-                                                                        <select class="form-control" id="role"
-                                                                            name="role" required>
-                                                                            <option value="" disabled>Pilih...
-                                                                            </option>
-                                                                            <option value="superadmin"
-                                                                                {{ $admin->role === 'superadmin' ? 'selected' : '' }}>
-                                                                                Super Admin</option>
-                                                                            <option value="admin"
-                                                                                {{ $admin->role === 'admin' ? 'selected' : '' }}>
-                                                                                Admin</option>
-                                                                            <option value="user"
-                                                                                {{ $admin->role === 'user' ? 'selected' : '' }}>
-                                                                                User</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Tutup</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Simpan</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <div class="modal fade" id="editTechnicianModal{{ $admin->id }}" tabindex="-1"
+    aria-labelledby="editTechnicianModalLabel{{ $admin->id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editTechnicianModalLabel{{ $admin->id }}">Edit Admin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="{{ route('users.update', $admin->id) }}">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <!-- Nama -->
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-3">
+                            <label for="name" class="form-label">Nama</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="name" name="name"
+                                value="{{ $admin->name }}" required>
+                        </div>
+                    </div>
+                    <!-- Username -->
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-3">
+                            <label for="username" class="form-label">Username</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="username" name="username"
+                                value="{{ $admin->username }}" required>
+                        </div>
+                    </div>
+                    <!-- Email -->
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-3">
+                            <label for="email" class="form-label">Email</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="email" class="form-control" id="email" name="email"
+                                value="{{ $admin->email }}" required>
+                        </div>
+                    </div>
+                    <!-- Role -->
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-3">
+                            <label for="role" class="form-label">Role</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select class="form-control" id="role_{{ $admin->id }}" name="role" required>
+                                <option value="" disabled>Pilih...</option>
+                                <option value="superadmin" {{ $admin->role === 'superadmin' ? 'selected' : '' }}>
+                                    Super Admin</option>
+                                <option value="admin" {{ $admin->role === 'admin' ? 'selected' : '' }}>
+                                    Admin</option>
+                                <option value="user" {{ $admin->role === 'user' ? 'selected' : '' }}>
+                                    User</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Puskesmas ID (akan muncul hanya untuk role admin) -->
+                    <div class="row mb-3 align-items-center" id="puskesmasField_{{ $admin->id }}"
+                        style="display: {{ $admin->role === 'admin' ? 'flex' : 'none' }};">
+                        <div class="col-md-3">
+                            <label for="puskesmas_id" class="form-label">Puskesmas</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select class="form-control" id="puskesmas_id_{{ $admin->id }}" name="puskesmas_id"
+                                {{ $admin->role === 'admin' ? 'required' : '' }}>
+                                <option value="">Pilih Puskesmas</option>
+                                @php
+                                    $puskesmas = \App\Models\Puskesmas::all();
+                                @endphp
+                                @foreach($puskesmas as $p)
+                                    <option value="{{ $p->id }}"
+                                        {{ $admin->puskesmas_id == $p->id ? 'selected' : '' }}>
+                                        {{ $p->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Script untuk menampilkan/menyembunyikan field puskesmas berdasarkan role -->
+<script>
+    document.getElementById('role_{{ $admin->id }}').addEventListener('change', function() {
+        const puskesmasField = document.getElementById('puskesmasField_{{ $admin->id }}');
+        const puskesmasSelect = document.getElementById('puskesmas_id_{{ $admin->id }}');
+
+        if (this.value === 'admin') {
+            puskesmasField.style.display = 'flex';
+            puskesmasSelect.setAttribute('required', 'required');
+        } else {
+            puskesmasField.style.display = 'none';
+            puskesmasSelect.removeAttribute('required');
+        }
+    });
+</script>
                                             <!-- Modal Reset Password -->
                                             <div class="modal fade" id="resetPasswordModal{{ $admin->id }}"
                                                 tabindex="-1"
@@ -303,6 +324,23 @@
                                 </select>
                             </div>
                         </div>
+                        <!-- Puskesmas ID (akan muncul hanya untuk role admin) -->
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-md-3">
+                                <label for="puskesmas_id" class="form-label">Puskesmas</label>
+                            </div>
+                            <div class="col-md-9">
+                                <select class="form-control" id="puskesmas_id" name="puskesmas_id">
+                                    <option value="">Pilih Puskesmas</option>
+                                    @php
+                                        $puskesmas = \App\Models\Puskesmas::all();
+                                    @endphp
+                                    @foreach ($puskesmas as $p)
+                                        <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -312,4 +350,7 @@
             </div>
         </div>
     </div>
+
+    <!-- Script untuk menampilkan/menyembunyikan field puskesmas berdasarkan role -->
+
 @endsection

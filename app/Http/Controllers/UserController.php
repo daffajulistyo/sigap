@@ -29,6 +29,7 @@ class UserController extends Controller
                 'password' => 'required|string|min:8',
                 'username' => 'required|string|max:255|unique:users',
                 'role' => 'required|string|max:255',
+                'puskesmas_id' => 'required|exists:puskesmas,id',
             ],
         );
 
@@ -38,6 +39,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'username' => $request->username,
             'role' => $request->role,
+            'puskesmas_id' => $request->puskesmas_id
         ]);
 
         return redirect()->route('users.index')->with('success', 'Data Berhasil Ditambahkan.');
@@ -49,12 +51,14 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255',
             'role' => 'required|string|max:255',
+            'puskesmas_id' => 'required|exists:puskesmas,id',
 
         ]);
 
         $user->name = $request->name;
         $user->username = $request->username;
         $user->role = $request->role;
+        $user->puskesmas_id = $request->puskesmas_id;
 
 
         $user->save();
