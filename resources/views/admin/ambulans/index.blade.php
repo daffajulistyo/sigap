@@ -55,6 +55,7 @@
                                         @php
                                             $currentPuskesmas = null;
                                             $rowspanCount = 0;
+                                            $counter = 1;
                                         @endphp
 
                                         @foreach ($ambulans as $key => $ambulan)
@@ -64,7 +65,7 @@
                                                     $rowspanCount = $ambulans->where('puskesmas_id', $currentPuskesmas)->count();
                                                 @endphp
                                                 <tr>
-                                                    <td rowspan="{{ $rowspanCount }}">{{ $loop->iteration }}</td>
+                                                    <td rowspan="{{ $rowspanCount }}">{{ $counter }}</td>
                                                     <td rowspan="{{ $rowspanCount }}">
                                                         <strong>{{ $ambulan->puskesmas->nama ?? '-' }}</strong><br>
                                                         <small class="text-muted">{{ $ambulan->puskesmas->kecamatan ?? '' }}</small>
@@ -105,6 +106,9 @@
                                                         </form>
                                                     </td>
                                                 </tr>
+                                                @php
+                                                    $counter++;
+                                                @endphp
                                             @else
                                                 <tr>
                                                     <td>

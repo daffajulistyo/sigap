@@ -54,7 +54,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($riwayat as $item)
+                                        @forelse ($riwayat as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
@@ -130,9 +130,12 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                                @include('admin.riwayat-ambulans.edit')
-
-                                        @endforeach
+                                            @include('admin.riwayat-ambulans.edit')
+                                        @empty
+                                            <tr>
+                                                <td colspan="7" class="text-center">Tidak ada data riwayat ambulance</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
